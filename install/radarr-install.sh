@@ -29,6 +29,13 @@ mv Radarr /opt
 chmod 775 /opt/Radarr
 msg_ok "Installed Radarr"
 
+if ! getent group "radarr" >/dev/null; then
+  groupadd "radarr"
+fi
+if ! getent passwd "radarr" >/dev/null; then
+  adduser --system --no-create-home --ingroup "radarr" "radarr"
+fi
+
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/radarr.service
 [Unit]
