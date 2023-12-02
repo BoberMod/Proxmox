@@ -20,21 +20,24 @@ $STD apt-get install -y mc
 $STD apt-get install -y sqlite3
 msg_ok "Installed Dependencies"
 
+msg_info "Creating User and Group"
+if ! getent group "radarr" >/dev/null; then
+  groupadd -g 1000 "radarr"
+fi
+if ! getent passwd "radarr" >/dev/null; then
+  adduser --system --no-create-home --ingroup "radarr" -u 1000 "radarr"
+fi
+
 msg_info "Installing Radarr"
 mkdir -p /var/lib/radarr/
+chown -R radarr:radarr /var/lib/radarr/
 chmod 775 /var/lib/radarr/
 $STD wget --content-disposition 'https://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64'
 $STD tar -xvzf Radarr.master.*.tar.gz
 mv Radarr /opt
+chown -R radarr:radarr /opt/Radarr
 chmod 775 /opt/Radarr
 msg_ok "Installed Radarr"
-
-if ! getent group "radarr" >/dev/null; then
-  groupadd "radarr"
-fi
-if ! getent passwd "radarr" >/dev/null; then
-  adduser --system --no-create-home --ingroup "radarr" "radarr"
-fi
 
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/radarr.service
