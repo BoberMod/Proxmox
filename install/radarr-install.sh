@@ -35,6 +35,8 @@ cat <<EOF >/etc/systemd/system/radarr.service
 Description=Radarr Daemon
 After=syslog.target network.target
 [Service]
+User=radarr
+Group=radarr
 UMask=0002
 Type=simple
 ExecStart=/opt/Radarr/Radarr -nobrowser -data=/var/lib/radarr/
