@@ -20,3 +20,17 @@ Options are displayed to users in a dialog box format. Once the user makes their
 Be cautious and thoroughly evaluate scripts and automation tasks obtained from external sources. <a href="https://github.com/tteck/Proxmox/blob/main/CODE-AUDIT.md">Read more</a>
 </p>
 <sub><div align="center"> Proxmox® is a registered trademark of Proxmox Server Solutions GmbH. </div></sub>
+
+---
+
+<h1 align="center">Changes in fork</h1>
+
+This fork contains updated installation scripts for some services to make process of <a href="https://itsembedded.com/sysadmin/proxmox_bind_unprivileged_lxc/#method-2-changing-the-default-lxc-uidgid-mapping">binding mount points</a> to unprivileged LXC containers easier. Fork is automatically synchronized with upstream. All scripts, except for installations, are loaded from the original repository.
+
+<h3>Changelog: </h1>
+
+<b> radarr </b>
+<ul>
+  <li>New user <code>radarr</code> with UID 1000 is added</li>
+  <li>New group <code>radarr</code> with GID 1000 is added</li>
+</ul>
